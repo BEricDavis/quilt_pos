@@ -4,5 +4,5 @@ from app import app
 @app.route('/')
 @app.route('/index')
 def index():
-    return '<html><h1>Welcome to the Little Shop of Stitches!</h1></html>'
+    return render_template('index.html')
 
