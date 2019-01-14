@@ -2,3 +2,4 @@ venv/
 *.idea
 *.zip
 *.gz
+pos.db

@@ -1,0 +1,81 @@
+# Encrypt db contents?
+
+users - individual with the ability to log into the system
+- id - int - primary key
+- login - varchar 256
+- password - varchar 256 - hashed
+- lastlogin - timestamp
+- admin - maybe use some kind of role-based permissions?
+
+
+customers - individual likely to make a purchase
+- id - int - primary key
+- first_name -
+- last_name -
+- email
+- birthday
+- street1
+- street2
+- city
+- state
+- zip
+- country
+- last_purchase
+- reward_points
+
+reward_points_history ? - just track in purchase?
+- id
+- customer_id
+- purchase_id
+
+purchase_history ?
+- id - int - pk
+- customer_id - fk into customer (is this ok?)
+- purchase_id - fk into purchase
+
+
+purchases (transaction?)
+- id
+- timestamp
+- customer_id
+- items - list of items?
+- tax_rate
+- tax
+- total
+- reward_points ?
+- user
+
+
+purchase_items
+- id - int - pk
+- purchase_id
+- item_id
+- quantity
+- price
+- discount?
+
+
+items
+- id - int - pk
+- description
+- cost
+- price
+- serial (?)
+- sku
+- item_id
+- quantity - how many in inventory
+- last_sold - timestamp - should be able to link to the transaction?
+
+
+price_history - keep track of the historical prices of items
+- id - int pk
+- timestamp
+- previous_price
+- new_price
+- user_id - who made this change?
+
+
+
+
+
+
