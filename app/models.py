@@ -66,6 +66,11 @@ class Purchase(db.Model):
         return f'<Purchase id:{self.id}, customer_id{self.customer_id}, timestamp:{self.timestamp},' \
                f'total_items:{self.total_items}>'
 
+
+    def purchase(self):
+        pass
+
+
 customer_purchases = db.Table('customer_purchases',
                               db.Column('customer_id', db.Integer, db.ForeignKey('customer.id'), primary_key=True),
                               db.Column('purchase_id', db.Integer, db.ForeignKey('purchase.id'), primary_key=True))

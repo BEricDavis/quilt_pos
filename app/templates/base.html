@@ -6,8 +6,11 @@
     <title>LSOS</title>
 </head>
 <body>
+<a href="{{ url_for('index') }}">Home</a>
+<a href="{{ url_for('add_customer') }}">Add Customer</a>
+<div>
 {% block content %}
 {% endblock %}
-
+</div>
 </body>
 </html>
