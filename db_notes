@@ -38,7 +38,7 @@ purchases (transaction?)
 - id
 - timestamp
 - customer_id
-- items - list of items?
+#- items - list of items? - nope
 - tax_rate
 - tax
 - total
