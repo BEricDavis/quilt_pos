@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for
 from app import app, db
-from app.models import Customer
-from app.forms import NewCustomerForm
+from app.models import Customer, Item
+from app.forms import NewCustomerForm, NewItemForm
 
 @app.route('/')
 @app.route('/index')
@@ -32,3 +32,20 @@ def add_customer():
         print('not validated')
 
     return render_template('customer_add.html', title='Add new customer', form=form)
+
+@app.route('/item/add', methods=['GET', 'POST'])
+def item_add():
+    form = NewItemForm()
+
+    if form.validate_on_submit():
+        item = Item(description=form.description.data,
+                    sku=form.sku.data,
+                    item_number=form.item_number.data,
+                    quantity=form.quantity.data,
+                    cost=form.cost.data,
+                    price=form.price.data)
+        db.session.add(item)
+        db.session.commit()
+        flash('Item added')
+        return redirect(url_for('item_add'))
+    return render_template('item_add.html', title='Add new Item', form=form)

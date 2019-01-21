@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, DateField
+from wtforms import StringField, SubmitField, DateField, FloatField
 from wtforms.validators import DataRequired, ValidationError, Email
 from app.models import Customer
 
@@ -23,3 +23,12 @@ class NewCustomerForm(FlaskForm):
     #         pass
 
 
+class NewItemForm(FlaskForm):
+    description = StringField('Description', validators=[DataRequired()])
+    sku = StringField('SKU', validators=[DataRequired()])
+    item_number = StringField('Shop Item Number', validators=[DataRequired()])
+    quantity = FloatField('Quantity', validators=[DataRequired()])
+    cost = FloatField('Cost')
+    price = FloatField('Price', validators=[DataRequired()])
+
+    submit = SubmitField('Add')

@@ -31,7 +31,7 @@ class Customer(db.Model):
 
 
     def __repr__(self):
-        return f'<Customer id:{self.id}, first_name:{self.first_name}, last_name:{self.last_name}>'
+        return f'<Customer id:{self.id}, first_name:{self.first_name}, last_name:{self.last_name}, email:{self.email}>'
 
 
 class Item(db.Model):
@@ -40,9 +40,11 @@ class Item(db.Model):
     cost = db.Column(db.Float(10, 2), default=0)
     price = db.Column(db.Float(10, 2), nullable=False)
     sku = db.Column(db.String(128), nullable=False)
-    inventory = db.Column(db.Float(10,3), default=0)
-    last_sold = db.Column(db.DateTime())
+    item_number = db.Column(db.String(128))
+    quantity = db.Column(db.Float(10,3), default=0)
+    last_sold = db.Column(db.DateTime)
     serial_number = db.Column(db.String(128))
+    category = db.Column(db.String(128))
 
     def __repr__(self):
         return f'<Item id:{self.id}, sku:{self.sku}, description:{self.description}>'

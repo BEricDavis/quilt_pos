@@ -8,7 +8,17 @@
 <body>
 <a href="{{ url_for('index') }}">Home</a>
 <a href="{{ url_for('add_customer') }}">Add Customer</a>
+<a href="{{ url_for('item_add') }}">Add Item</a>
 <div>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
 {% block content %}
 {% endblock %}
 </div>
