@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table>
+        <thead>
+        <tr>
+            <td >Name</td>
+            <td >Address</td>
+            <td>City</td>
+            <td>State</td>
+            <td>Zip</td>
+            <td>Reward Points</td>
+            <td>Last Purchase</td>
+        </tr>
+    </thead>
+    <tbody>
+{% for customer in customers %}
+
+<tr>
+    <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+    <td>{{ customer.street1 }} {{ customer.street2 }}</td>
+    <td>{{ customer.city }}</td><td> {{ customer.state }}</td><td> {{ customer.zip }}</td>
+    <td>{{ customer.reward_points }}</td>
+    <td>{{ customer.last_purchase }}</td>
+</tr>
+{% endfor %}
+    </tbody>
+</table>
+{% if prev_url %}
+<a href="{{ prev_url }}">Back</a>
+{% endif %}
+{% if next_url %}
+<a href="{{ next_url }}">Next</a>
+{% endif %}
+{% endblock %}

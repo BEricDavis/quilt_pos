@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table>
+        <thead>
+        <tr>
+            <td>Description</td>
+            <td>SKU</td>
+            <td>Item Number</td>
+            <td>Cost</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Last Sold</td>
+            <td>Category</td>
+        </tr>
+    </thead>
+    <tbody>
+{% for item in items %}
+
+<tr>
+    <td>{{ item.description }}</td>
+    <td>{{ item.sku }}</td>
+    <td>{{ item.item_number }}</td>
+        <td>${{ '%0.2f' % item.cost }}</td>
+    <td>${{ '%0.2f' % item.price }}</td>
+    <td>{{ '%0.2f' % item.quantity }}</td>
+    <td>{{ item.last_sold }}</td>
+    <td>{{ item.category }}</td>
+</tr>
+{% endfor %}
+    </tbody>
+</table>
+{% if prev_url %}
+<a href="{{ prev_url }}">Back</a>
+{% endif %}
+{% if next_url %}
+<a href="{{ next_url }}">Next</a>
+{% endif %}
+{% endblock %}

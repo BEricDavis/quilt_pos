@@ -16,7 +16,7 @@
 
 </head>
 <body>
-
+<div><h1>Welcome to the Little Shop of Stitches</h1></div>
 <!-- menu button group -->
 <div class="btn-group" role="group" aria-label="menu bar">
     <a class="btn btn-primary" href="{{ url_for('index') }}" role="button" id="indexMenuLink" >
@@ -30,7 +30,8 @@
   </a>
 
   <div class="dropdown-menu" aria-labelledby="customerMenuLink">
-    <a class="dropdown-item" href="{{ url_for('add_customer') }}">Add New Customer</a>
+      <a class="dropdown-item" href="{{ url_for('customer_list') }}">List Customers</a>
+      <a class="dropdown-item" href="{{ url_for('add_customer') }}">Add New Customer</a>
 
   </div>
 </div>
@@ -42,6 +43,8 @@
   </a>
 
   <div class="dropdown-menu" aria-labelledby="inventoryMenuLink">
+   <a class="dropdown-item" href="{{ url_for('item_list') }}">List Items</a>
+
     <a class="dropdown-item" href="{{ url_for('item_add') }}">Add New Item</a>
 
   </div>
