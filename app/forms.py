@@ -26,6 +26,21 @@ class NewCustomerForm(FlaskForm):
     #     if birthday is not None:
     #         pass
 
+class EditCustomerForm(FlaskForm):
+    first_name = StringField('First Name', validators=[DataRequired()])
+    last_name = StringField('Last Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[Email()])
+    street1 = StringField('Address 1')
+    street2 = StringField('Address 2')
+    city = StringField('City')
+    state = StringField('State')
+    zip = StringField('Zip')
+    phone = StringField('Phone')
+    birthday = DateField('Birthday (mm/dd)', default=app.config['DATEUTIL_DEFAULT'])
+
+
+    submit = SubmitField('Save')
+
 
 class NewItemForm(FlaskForm):
     description = StringField('Description', validators=[DataRequired()])

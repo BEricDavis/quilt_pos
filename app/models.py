@@ -31,7 +31,7 @@ class Customer(db.Model):
 
 
     def __repr__(self):
-        return f'<Customer id:{self.id}, first_name:{self.first_name}, last_name:{self.last_name}, email:{self.email}>'
+        return f'<Customer id:{self.id}, first_name:{self.first_name}, last_name:{self.last_name}, email:{self.email}, birthday:{self.birthday}>'
 
 
 class Item(db.Model):

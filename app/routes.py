@@ -1,7 +1,8 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from app.models import Customer, Item
-from app.forms import NewCustomerForm, NewItemForm
+from app.forms import NewCustomerForm, NewItemForm, EditCustomerForm
+from datetime import datetime
 
 @app.route('/')
 @app.route('/index')
@@ -20,6 +21,7 @@ def add_customer():
         print('validated')
         customer = Customer(first_name=form.first_name.data,
                             last_name=form.last_name.data,
+                            email=form.email.data,
                             birthday=form.birthday.data,
                             street1=form.street1.data,
                             street2=form.street2.data,
@@ -49,6 +51,49 @@ def customer_list():
     return render_template('customer_list.html', title='Customer List', customers=customers.items,
                            next_url=next_url, prev_url=prev_url)
 
+@app.route('/customer/edit/<customer_id>', methods=['GET','POST'])
+def customer_edit(customer_id):
+    form = EditCustomerForm()
+    customer = Customer.query.filter_by(id=customer_id).first()
+    print(customer)
+    if customer is None:
+        flash('Customer not found')
+        return render_template('customer_list.html')
+
+    if customer.birthday is None:
+        print('Updating birthday')
+        customer.birthday=app.config['DATEUTIL_DEFAULT']
+        db.session.commit()
+
+    elif form.validate_on_submit():
+        customer.first_name = form.first_name.data
+        customer.last_name = form.last_name.data
+        customer.email = form.email.data
+        customer.birthday = datetime(form.birthday.data.year, form.birthday.data.month, form.birthday.data.day)
+        customer.street1 = form.street1.data
+        customer.street2 = form.street2.data
+        customer.city = form.city.data
+        customer.state = form.state.data
+        customer.zip = form.zip.data
+
+        db.session.commit()
+        flash('Customer updated')
+
+        return redirect(url_for('customer_edit', customer_id=customer.id))
+
+    elif request.method == 'GET':
+        form.first_name.data = customer.first_name
+        form.last_name.data = customer.last_name
+        form.email.data = customer.email
+        #form.birthday = customer.birthday.strftime('%m/%d')
+        # form.birthday = datetime.strptime(customer.birthday, app.config['DATEUTIL_DEFAULT'])
+        form.street1.data = customer.street1
+        form.street2.data = customer.street2
+        form.city.data = customer.city
+        form.state.data = customer.state
+        form.zip.data = customer.zip
+
+    return render_template('customer_add.html', title='Edit Customer', form=form)
 
 
 #================
