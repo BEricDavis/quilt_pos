@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from app import app
 from datetime import datetime
-from wtforms import StringField, SubmitField, FloatField
+from wtforms import StringField, SubmitField, FloatField, DecimalField
 from wtforms.validators import DataRequired, ValidationError, Email, Optional
 from wtforms.ext.dateutil.fields import DateField, DateTimeField
 from wtforms.ext import dateutil
@@ -46,8 +46,18 @@ class NewItemForm(FlaskForm):
     description = StringField('Description', validators=[DataRequired()])
     sku = StringField('SKU', validators=[DataRequired()])
     item_number = StringField('Shop Item Number', validators=[DataRequired()])
-    quantity = FloatField('Quantity', validators=[DataRequired()])
-    cost = FloatField('Cost')
-    price = FloatField('Price', validators=[DataRequired()])
+    quantity = DecimalField('Quantity', places=3, validators=[DataRequired()])
+    cost = DecimalField('Cost', places=2)
+    price = DecimalField('Price', places=2, validators=[DataRequired()])
 
     submit = SubmitField('Add')
+
+class EditItemForm(FlaskForm):
+    description = StringField('Description', validators=[DataRequired()])
+    sku = StringField('SKU', validators=[DataRequired()])
+    item_number = StringField('Shop Item Number', validators=[DataRequired()])
+    quantity = DecimalField('Quantity', places=3, validators=[DataRequired()])
+    cost = DecimalField('Cost', places=2)
+    price = DecimalField('Price', places=2, validators=[DataRequired()])
+
+    submit = SubmitField('Save')

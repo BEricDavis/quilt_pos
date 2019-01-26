@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from app.models import Customer, Item
-from app.forms import NewCustomerForm, NewItemForm, EditCustomerForm
+from app.forms import NewCustomerForm, NewItemForm, EditCustomerForm, EditItemForm
 from datetime import datetime
 
 @app.route('/')
@@ -32,7 +32,7 @@ def add_customer():
         db.session.add(customer)
         db.session.commit()
         flash('Customer added')
-        return redirect(url_for('index'))
+        return redirect(url_for('customer_edit', customer_id=customer.id))
     else:
         print('not validated')
 
@@ -52,6 +52,7 @@ def customer_list():
                            next_url=next_url, prev_url=prev_url)
 
 @app.route('/customer/edit/<customer_id>', methods=['GET','POST'])
+# TODO: add validation that the email doesn't already exist
 def customer_edit(customer_id):
 
     customer = Customer.query.filter_by(id=customer_id).first()
@@ -132,3 +133,25 @@ def item_list():
 
     return render_template('item_list.html', title='Item List', items=items.items,
                            next_url=next_url, prev_url=prev_url)
+
+@app.route('/item/edit/<id>', methods=['GET', 'POST'])
+def item_edit(id):
+    item = Item.query.filter_by(id=id).first()
+    form = EditItemForm(obj=item)
+
+
+    if form.validate_on_submit():
+        item.description = form.description.data
+        item.sku = form.sku.data
+        item.item_number = form.item_number.data
+        item.quantity = form.quantity.data
+        item.cost = form.cost.data
+        item.price = form.price.data
+
+
+        db.session.commit()
+        flash('Item updated')
+        return redirect(url_for('item_edit', id=id))
+
+    elif request.method == 'GET':
+        return render_template('item_add.html', title='Edit Item', form=form)
