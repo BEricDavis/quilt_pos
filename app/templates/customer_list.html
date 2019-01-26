@@ -23,7 +23,7 @@
     <td>{{ customer.city }}</td><td> {{ customer.state }}</td><td> {{ customer.zip }}</td>
     <td>{{ customer.reward_points }}</td>
     <td>{{ customer.last_purchase }}</td>
-    <td>{{ customer.birthday }}</td>
+    <td>{{ customer.birthday|datetimeformat }}</td>
 </tr>
 {% endfor %}
     </tbody>
