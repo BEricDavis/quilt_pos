@@ -19,8 +19,8 @@ class Config(object):
     ADMINS = ['some-email@example.com']
 
     # Pagination
-    CUSTOMERS_PER_PAGE = 3
-    ITEMS_PER_PAGE = 3
+    CUSTOMERS_PER_PAGE = 10
+    ITEMS_PER_PAGE = 10
 
     # dateutil config
     DATEUTIL_DEFAULT = datetime(1972, 1, 1)
