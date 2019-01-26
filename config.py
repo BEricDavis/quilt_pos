@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
@@ -17,5 +18,9 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['some-email@example.com']
 
+    # Pagination
     CUSTOMERS_PER_PAGE = 3
     ITEMS_PER_PAGE = 3
+
+    # dateutil config
+    DATEUTIL_DEFAULT = datetime(1972, 1, 1)

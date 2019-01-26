@@ -20,7 +20,7 @@ def add_customer():
         print('validated')
         customer = Customer(first_name=form.first_name.data,
                             last_name=form.last_name.data,
-                            #birthday=form.birthday.data,
+                            birthday=form.birthday.data,
                             street1=form.street1.data,
                             street2=form.street2.data,
                             city=form.city.data,

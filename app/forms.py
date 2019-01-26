@@ -1,6 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, DateField, FloatField
+from app import app
+from datetime import datetime
+from wtforms import StringField, SubmitField, FloatField
 from wtforms.validators import DataRequired, ValidationError, Email
+from wtforms.ext.dateutil.fields import DateField, DateTimeField
+from wtforms.ext import dateutil
 from app.models import Customer
 
 class NewCustomerForm(FlaskForm):
@@ -13,7 +17,7 @@ class NewCustomerForm(FlaskForm):
     state = StringField('State')
     zip = StringField('Zip')
     phone = StringField('Phone')
-    # birthday = DateField('Birthday (mm/dd)', format('%m/%d'))
+    birthday = DateField('Birthday (mm/dd)', default=app.config['DATEUTIL_DEFAULT'])
 
     submit = SubmitField('Add')
 
