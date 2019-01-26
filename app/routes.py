@@ -53,8 +53,10 @@ def customer_list():
 
 @app.route('/customer/edit/<customer_id>', methods=['GET','POST'])
 def customer_edit(customer_id):
-    form = EditCustomerForm()
+
     customer = Customer.query.filter_by(id=customer_id).first()
+    # TODO: does adding the object here buy me anything?
+    form = EditCustomerForm(obj=customer)
     print(customer)
     if customer is None:
         flash('Customer not found')
@@ -86,6 +88,7 @@ def customer_edit(customer_id):
         form.last_name.data = customer.last_name
         form.email.data = customer.email
         form.birthday.data = customer.birthday
+        print(type(form.birthday.data))
         #form.birthday = customer.birthday.strftime('%m/%d')
         # form.birthday = datetime.strptime(customer.birthday, app.config['DATEUTIL_DEFAULT'])
         form.street1.data = customer.street1

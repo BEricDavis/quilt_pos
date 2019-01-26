@@ -11,7 +11,7 @@
             <td>Zip</td>
             <td>Reward Points</td>
             <td>Last Purchase</td>
-            <td>Birthday</td>
+            <td>Birthday<br>Month/Day</td>
         </tr>
     </thead>
     <tbody>
@@ -23,7 +23,7 @@
     <td>{{ customer.city }}</td><td> {{ customer.state }}</td><td> {{ customer.zip }}</td>
     <td>{{ customer.reward_points }}</td>
     <td>{{ customer.last_purchase }}</td>
-    <td>{{ customer.birthday|datetimeformat }}</td>
+    <td>{{ customer.birthday|datetimeformat(format=None) }}</td>
 </tr>
 {% endfor %}
     </tbody>
