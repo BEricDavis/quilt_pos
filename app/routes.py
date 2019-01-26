@@ -85,6 +85,7 @@ def customer_edit(customer_id):
         form.first_name.data = customer.first_name
         form.last_name.data = customer.last_name
         form.email.data = customer.email
+        form.birthday.data = customer.birthday
         #form.birthday = customer.birthday.strftime('%m/%d')
         # form.birthday = datetime.strptime(customer.birthday, app.config['DATEUTIL_DEFAULT'])
         form.street1.data = customer.street1
