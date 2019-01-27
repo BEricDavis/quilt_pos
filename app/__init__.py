@@ -1,10 +1,33 @@
 from flask import Flask
 from config import Config
+from flask.logging import default_handler
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import logging, os
+from logging.handlers import RotatingFileHandler
 from datetime import datetime
 
+if not os.path.exists('logs'):
+    os.mkdir('logs')
+
+fh = RotatingFileHandler('logs/pos.log', maxBytes=100000, backupCount=10)
+sh = logging.StreamHandler()
+fm = logging.Formatter('%(asctime)s %(levelname)s %(name)s:%(filename)s:%(lineno)d %(message)s')
+
+fh.setFormatter(fm)
+sh.setFormatter(fm)
 app = Flask(__name__)
+app.logger.removeHandler(default_handler)
+
+fh.setLevel(logging.INFO)
+sh.setLevel(logging.INFO)
+
+# logger = logging.getLogger('flask')
+app.logger.addHandler(fh)
+app.logger.addHandler(sh)
+
+
+app.logger.info('App starting')
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)

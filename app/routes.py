@@ -58,13 +58,13 @@ def customer_edit(customer_id):
     customer = Customer.query.filter_by(id=customer_id).first()
     # TODO: does adding the object here buy me anything?
     form = EditCustomerForm(obj=customer)
-    print(customer)
+    app.logger.info(customer)
     if customer is None:
         flash('Customer not found')
         return render_template('customer_list.html')
 
     if customer.birthday is None:
-        print('Updating birthday')
+        app.logger.info('Updating birthday')
         customer.birthday=app.config['DATEUTIL_DEFAULT']
         db.session.commit()
 

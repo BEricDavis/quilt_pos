@@ -3,3 +3,4 @@ venv/
 *.zip
 *.gz
 pos.db
+logs/
