@@ -1,59 +1,65 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-
+<h3>Add New Item</h3>
+<div class="row">
+    <div class="col-md-4">
+        {{ wtf.quick_form(form) }}
+    </div>
+</div>
     <!--<h1>Add new Item</h1>-->
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <div>
-        <p>
-            {{ form.description.label }}<br>
-            {{ form.description(size=32) }}<br>
-            {% for error in form.description.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.sku.label }}<br>
-            {{ form.sku(size=63) }}<br>
-            {% for error in form.sku.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{form.item_number.label }}<br>
-            {{ form.item_number(size=64) }}<br>
-            {% for error in form.item_number.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.cost.label }}<br>
-            {{ form.cost(size=5) }}<br>
-            {% for error in form.cost.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
+    <!--<form action="" method="post">-->
+        <!--{{ form.hidden_tag() }}-->
+        <!--<div>-->
+        <!--<p>-->
+            <!--{{ form.description.label }}<br>-->
+            <!--{{ form.description(size=32) }}<br>-->
+            <!--{% for error in form.description.errors %}-->
+            <!--<span style="color: red;">[{{ error }}]</span>-->
+            <!--{% endfor %}-->
+        <!--</p>-->
+        <!--<p>-->
+            <!--{{ form.sku.label }}<br>-->
+            <!--{{ form.sku(size=63) }}<br>-->
+            <!--{% for error in form.sku.errors %}-->
+            <!--<span style="color: red;">[{{ error }}]</span>-->
+            <!--{% endfor %}-->
+        <!--</p>-->
+        <!--<p>-->
+            <!--{{form.item_number.label }}<br>-->
+            <!--{{ form.item_number(size=64) }}<br>-->
+            <!--{% for error in form.item_number.errors %}-->
+            <!--<span style="color: red;">[{{ error }}]</span>-->
+            <!--{% endfor %}-->
+        <!--</p>-->
+        <!--<p>-->
+            <!--{{ form.cost.label }}<br>-->
+            <!--{{ form.cost(size=5) }}<br>-->
+            <!--{% for error in form.cost.errors %}-->
+            <!--<span style="color: red;">[{{ error }}]</span>-->
+            <!--{% endfor %}-->
+        <!--</p>-->
 
-        <p>
-            {{ form.price.label }}<br>
-            {{ form.price(size=5) }}<br>
-            {% for error in form.price.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
+        <!--<p>-->
+            <!--{{ form.price.label }}<br>-->
+            <!--{{ form.price(size=5) }}<br>-->
+            <!--{% for error in form.price.errors %}-->
+            <!--<span style="color: red;">[{{ error }}]</span>-->
+            <!--{% endfor %}-->
+        <!--</p>-->
 
-        <p>
-            {{ form.quantity.label }}<br>
-            {{ form.quantity(size=5) }}<br>
-            {% for error in form.quantity.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
+        <!--<p>-->
+            <!--{{ form.quantity.label }}<br>-->
+            <!--{{ form.quantity(size=5) }}<br>-->
+            <!--{% for error in form.quantity.errors %}-->
+            <!--<span style="color: red;">[{{ error }}]</span>-->
+            <!--{% endfor %}-->
+        <!--</p>-->
 
-        <p>{{ form.submit() }}</p>
-        </div>
-    </form>
+        <!--<p>{{ form.submit() }}</p>-->
+        <!--</div>-->
+    <!--</form>-->
 
 
 {% endblock %}
