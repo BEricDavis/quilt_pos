@@ -1,68 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>LSOS</title>
+{% extends 'bootstrap/base.html' %}
+{% block scripts %}
+{{ super() }}
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/lsos.css') }}">
-
-    <!-- javascript -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-
-</head>
-<body>
-<div><h1>Welcome to the Little Shop of Stitches</h1></div>
-<!-- menu button group -->
-<div class="btn-group" role="group" aria-label="menu bar">
-    <a class="btn btn-primary" href="{{ url_for('index') }}" role="button" id="indexMenuLink" >
-    Home
-  </a>
-<!-- Customer menu -->
-
-<div class="dropdown show">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="customerMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Customers
-  </a>
-
-  <div class="dropdown-menu" aria-labelledby="customerMenuLink">
-      <a class="dropdown-item" href="{{ url_for('customer_list') }}">List Customers</a>
-      <a class="dropdown-item" href="{{ url_for('add_customer') }}">Add New Customer</a>
-
-  </div>
-</div>
-
-<!-- Inventory menu -->
-<div class="dropdown show">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="inventoryMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Inventory
-  </a>
-
-  <div class="dropdown-menu" aria-labelledby="inventoryMenuLink">
-   <a class="dropdown-item" href="{{ url_for('item_list') }}">List Items</a>
-
-    <a class="dropdown-item" href="{{ url_for('item_add') }}">Add New Item</a>
-
-  </div>
-</div>
-    </div>
-<!-- end menu button group -->
-<div>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    {% endwith %}
-{% block content %}
 {% endblock %}
-</div>
-</body>
-</html>
+
+{% block title %}
+{% if title %}{{ title }} - QuiltPOS{% else %}QuiltPOS{% endif %}
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{{ url_for('index') }}">QuiltPOS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="inventoryMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Items
+        </a>
+        <div class="dropdown-menu" aria-labelledby="inventoryMenuLink">
+          <a class="dropdown-item" href="{{ url_for('item_list') }}">List Items</a>
+          <a class="dropdown-item" href="{{ url_for('item_add') }}">Add New Item</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="customerMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Customers
+        </a>
+        <div class="dropdown-menu" aria-labelledby="customerMenuLink">
+          <a class="dropdown-item" href="{{ url_for('customer_list') }}">List Customers</a>
+          <a class="dropdown-item" href="{{ url_for('add_customer') }}">Add New Customer</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {# application content needs to be provided in the app_content block #}
+        {% block app_content %}{% endblock %}
+    </div>
+{% endblock %}
+
+
+
+

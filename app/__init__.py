@@ -1,5 +1,6 @@
 from flask import Flask
 from config import Config
+from flask_bootstrap import Bootstrap
 from flask.logging import default_handler
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -31,6 +32,7 @@ app.logger.info('App starting')
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+bootstrap = Bootstrap(app)
 
 def format_datetime(value, format='full'):
     # https://stackoverflow.com/questions/4830535/python-how-do-i-format-a-date-in-jinja2
