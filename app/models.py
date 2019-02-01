@@ -8,7 +8,7 @@ class User(db.Model):
     name = db.Column(db.String(128))
 
     def __repr__(self):
-        return f'<User id:{self.id}, description:{self.description}>'
+        return f'<User id:{self.id}, name:{self.name}>'
 
 
 class Customer(db.Model):
@@ -27,7 +27,7 @@ class Customer(db.Model):
     reward_points = db.Column(db.Integer)
 
     purchases = db.relationship(
-        'Purchase', secondary='customer_purchases', backref=db.backref('customers', lazy='dynamic'), lazy='dynamic')
+        'Purchase', backref=db.backref('customer', lazy='dynamic', uselist=True), lazy='dynamic')
 
 
     def __repr__(self):
@@ -73,9 +73,9 @@ class Purchase(db.Model):
         pass
 
 
-customer_purchases = db.Table('customer_purchases',
-                              db.Column('customer_id', db.Integer, db.ForeignKey('customer.id'), primary_key=True),
-                              db.Column('purchase_id', db.Integer, db.ForeignKey('purchase.id'), primary_key=True))
+# customer_purchases = db.Table('customer_purchases',
+#                               db.Column('customer_id', db.Integer, db.ForeignKey('customer.id'), primary_key=True),
+#                               db.Column('purchase_id', db.Integer, db.ForeignKey('purchase.id'), primary_key=True))
 
 
 purchase_items = db.Table('purchase_items',
