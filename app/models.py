@@ -10,6 +10,9 @@ class User(db.Model):
     def __repr__(self):
         return f'<User id:{self.id}, name:{self.name}>'
 
+customer_purchase = db.Table('customer_purchase',
+                              db.Column('customer_id', db.Integer, db.ForeignKey('customer.id'), primary_key=True),
+                              db.Column('purchase_id', db.Integer, db.ForeignKey('purchase.id'), primary_key=True))
 
 class Customer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,11 +30,17 @@ class Customer(db.Model):
     reward_points = db.Column(db.Integer)
 
     purchases = db.relationship(
-        'Purchase', backref=db.backref('customer', lazy='dynamic', uselist=True), lazy='dynamic')
+        'Purchase',
+        backref='customer', lazy='dynamic')
+
+
+    def purchase(self, user, item):
+        self.purchases.append(item)
 
 
     def __repr__(self):
         return f'<Customer id:{self.id}, first_name:{self.first_name}, last_name:{self.last_name}, email:{self.email}, birthday:{self.birthday}>'
+
 
 
 class Item(db.Model):
@@ -46,41 +55,42 @@ class Item(db.Model):
     serial_number = db.Column(db.String(128))
     category = db.Column(db.String(128))
 
+
+
     def __repr__(self):
         return f'<Item id:{self.id}, sku:{self.sku}, description:{self.description}>'
 
 # TODO: Consider capturing a dict of item.id and item.price at the time of purchase
 class Purchase(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    timestamp = db.Column(db.DateTime())
+    timestamp = db.Column(db.DateTime(), default=datetime.utcnow())
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id') )
+    #item_id = db.Column(db.Integer, db.ForeignKey('item.id'))
     tax_rate = db.Column(db.Float(2, 2))
     tax = db.Column(db.Float(10, 2))
     subtotal = db.Column(db.Float(10, 2))
     total = db.Column(db.Float(10, 2))
-    user = db.Column(db.Integer, db.ForeignKey('user.id'))
+    #user = db.Column(db.Integer, db.ForeignKey('user.id'))
     total_items = db.Column(db.Integer)
 
-    items = db.relationship(
-        'Item', secondary='purchase_items', backref=db.backref('purchase', lazy=True), lazy='dynamic')
+    # users = db.relationship(
+    #     User, backref=db.backref('purchase', lazy=True))
 
     def __repr__(self):
-        return f'<Purchase id:{self.id}, customer_id{self.customer_id}, timestamp:{self.timestamp},' \
+        return f'<Purchase id:{self.id} timestamp:{self.timestamp},' \
                f'total_items:{self.total_items}>'
 
-
-    def purchase(self):
-        pass
-
-
-# customer_purchases = db.Table('customer_purchases',
-#                               db.Column('customer_id', db.Integer, db.ForeignKey('customer.id'), primary_key=True),
-#                               db.Column('purchase_id', db.Integer, db.ForeignKey('purchase.id'), primary_key=True))
+    # def add_item(self, item_id):
+    #
 
 
-purchase_items = db.Table('purchase_items',
-                          db.Column('purchase_id', db.Integer, db.ForeignKey('purchase.id'), primary_key=True),
-                          db.Column('item_id', db.Integer, db.ForeignKey('item.id'), primary_key=True))
+
+
+
+
+# purchase_items = db.Table('purchase_items',
+#                           db.Column('purchase_id', db.Integer, db.ForeignKey('purchase.id'), primary_key=True),
+#                           db.Column('item_id', db.Integer, db.ForeignKey('item.id'), primary_key=True))
 # to update the database:
 # flask db migrate -m"some statement"
 # flask db upgrade
