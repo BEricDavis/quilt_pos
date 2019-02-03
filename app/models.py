@@ -42,6 +42,10 @@ class Customer(db.Model):
         return f'<Customer id:{self.id}, first_name:{self.first_name}, last_name:{self.last_name}, email:{self.email}, birthday:{self.birthday}>'
 
 
+purchase_items = db.Table('purchase_items',
+                          db.Column('purchase_id', db.Integer, db.ForeignKey('purchase.id')),
+                          db.Column('item_id', db.Integer, db.ForeignKey('item.id')))
+
 
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -60,7 +64,8 @@ class Item(db.Model):
     def __repr__(self):
         return f'<Item id:{self.id}, sku:{self.sku}, description:{self.description}>'
 
-# TODO: Consider capturing a dict of item.id and item.price at the time of purchase
+
+
 class Purchase(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     timestamp = db.Column(db.DateTime(), default=datetime.utcnow())
@@ -73,24 +78,21 @@ class Purchase(db.Model):
     #user = db.Column(db.Integer, db.ForeignKey('user.id'))
     total_items = db.Column(db.Integer)
 
-    # users = db.relationship(
-    #     User, backref=db.backref('purchase', lazy=True))
+    items = db.relationship(
+        'Item', secondary=purchase_items, backref=db.backref('purchases', lazy=True))
 
     def __repr__(self):
         return f'<Purchase id:{self.id} timestamp:{self.timestamp},' \
                f'total_items:{self.total_items}>'
 
-    # def add_item(self, item_id):
-    #
+    def add_item(self, item):
+        self.items.append(item)
 
 
 
 
 
 
-# purchase_items = db.Table('purchase_items',
-#                           db.Column('purchase_id', db.Integer, db.ForeignKey('purchase.id'), primary_key=True),
-#                           db.Column('item_id', db.Integer, db.ForeignKey('item.id'), primary_key=True))
 # to update the database:
 # flask db migrate -m"some statement"
 # flask db upgrade
