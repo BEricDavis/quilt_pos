@@ -70,11 +70,10 @@ class Purchase(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     timestamp = db.Column(db.DateTime(), default=datetime.utcnow())
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id') )
-    #item_id = db.Column(db.Integer, db.ForeignKey('item.id'))
     tax_rate = db.Column(db.Float(2, 2))
     tax = db.Column(db.Float(10, 2))
     subtotal = db.Column(db.Float(10, 2))
-    total = db.Column(db.Float(10, 2))
+    total = db.Column(db.Float(10, 2), default=0.00)
     #user = db.Column(db.Integer, db.ForeignKey('user.id'))
     total_items = db.Column(db.Integer)
 
@@ -87,6 +86,20 @@ class Purchase(db.Model):
 
     def add_item(self, item):
         self.items.append(item)
+        self.update_total(item=item, operation='add')
+
+
+    def remove_item(self, item):
+        self.items.remove(item)
+        self.update_total(item=item)
+
+
+    def update_total(self, item, operation):
+        if operation=='add':
+            self.total += item.price
+        else:
+            self.total -= item.price
+
 
 
 
