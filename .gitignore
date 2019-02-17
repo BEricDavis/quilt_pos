@@ -4,3 +4,4 @@ venv/
 *.gz
 pos.db
 logs/
+__pycache__
