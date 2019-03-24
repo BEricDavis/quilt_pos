@@ -36,13 +36,19 @@ bootstrap = Bootstrap(app)
 
 def format_datetime(value, format='full'):
     # https://stackoverflow.com/questions/4830535/python-how-do-i-format-a-date-in-jinja2
+
     if format == 'full':
         format = '%m/%d/%Y %H:%M'
     if format == 'year':
         format = '%m/%d/%Y'
     else:
         format = '%m/%d'
-    return value.strftime(format)
+    try:
+        return value.strftime(format)
+    except AttributeError as e:
+        print(e)
+        print('Received: {}'.format(value))
+        return None
 
 # def datetimeformat(value, format='%H:%M / %d-%m-%Y'):
 #     print('Start')
