@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+
+{{ customer.first_name }}
+<table>
+<tr>
+    <td><a href="{{ url_for('customer_edit', customer_id=customer.id) }}">{{ customer.first_name }} {{ customer.last_name }}</a></td>
+</tr>
+<tr>
+    <td>{{ customer.street1 }} {{ customer.street2 }}, </td>
+    <td>{{ customer.city }}, </td><td> {{ customer.state }}</td> <td> {{ customer.zip }}</td>
+</tr>
+<tr>
+    <td>{{ customer.reward_points }}</td>
+</tr>
+<tr>
+    <td>{{ customer.last_purchase }}</td>
+</tr>
+<tr>
+    <td>{{ customer.birthday|datetimeformat(format=None) }}</td>
+</tr>
+</table>
+{% endblock %}

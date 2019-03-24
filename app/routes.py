@@ -16,7 +16,8 @@ def index():
 def add_customer():
     form = NewCustomerForm()
 
-
+    # TODO: is there a way to normalize the states to their 2-letter code?
+    # what about provinces?  or other international locations?
     if form.validate_on_submit():
         print('validated')
         customer = Customer(first_name=form.first_name.data,
@@ -99,6 +100,17 @@ def customer_edit(customer_id):
         form.zip.data = customer.zip
 
     return render_template('customer_add.html', title='Edit Customer', form=form)
+
+@app.route('/customer/view/<customer_id>', methods=['GET'])
+def customer_view(customer_id):
+    customer = Customer.query.filter_by(id=customer_id).first()
+    page = request.args.get('page', 1, type=int)
+    if customer is None:
+        flash('Customer not found')
+        return redirect(url_for('customer_list', page=page))
+
+    return render_template('customer_view.html', title='View Customer', customer=customer)
+
 
 
 #================
