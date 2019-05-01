@@ -112,6 +112,18 @@ def customer_view(customer_id):
     return render_template('customer_view.html', title='View Customer', customer=customer)
 
 
+@app.route('/customer/purchase', methods=['GET', 'POST'])
+@app.route('/customer/purchase/<customer_id>', methods=['GET', 'POST'])
+def customer_purchase(customer_id=0):
+    if customer_id == 0:
+        # TODO: allow for anonymous purchases
+        flash("Yeah, we don't have anonymous purchasing yet")
+        return redirect(url_for('customer_list', page=1))
+    
+    else:
+        customer = Customer.query.filter_by(id=customer_id).first()
+        return render_template('customer_purchase.html', title='Purchase', customer=customer)
+    
 
 #================
 # Item routes
@@ -167,3 +179,5 @@ def item_edit(id):
 
     elif request.method == 'GET':
         return render_template('item_add.html', title='Edit Item', form=form)
+
+
