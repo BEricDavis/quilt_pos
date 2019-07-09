@@ -4,26 +4,20 @@
 <!-- A failed attempt to add rows to a cart table.  Not sure why this isn't working.-->
 <!--https://stackoverflow.com/questions/18997336/ajax-add-new-row-to-table-or-remove-using-ajax -->
 <!--http://jsfiddle.net/scumah/xtyFh/8/-->
-<script type="text/javascript" src="{{ url_for('static', filename='jquery/jquery-3.4.1.js') }}">
-var cartBody = $('#cart_body');
-var i = $('#cart_body tr').size() + 1;
+<!-- <script type="text/javascript"> -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/customer_purchase.js') }}">
 
-$('#addItem').click(function() {
-    cartBody.append('<tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><a href="#" id=removeItem">Remove</a></td></tr>');
-    i++;
-    return false;
-});
 
-$(document).on('click', '#removeItem', function() {
-    if (i > 2) {
-        $(this).closest('tr').remove();
-        i--;
-    }
-    return false
-});
 </script>
 
-<div id="pos">
+<div id="cart_header" class="table">Header Stuff?</div>
+<div id="cart_body" class="body">
+    <div id="cart_item" class="row">things</div>
+    
+</div>
+
+
+<!-- <div id="pos">
     <div id="customer">
 {{ customer.first_name }}, {{ customer.last_name }}
 </div>
@@ -54,8 +48,9 @@ $(document).on('click', '#removeItem', function() {
     </table>
     
 </div>
-</div>
-<a href="#" id="addItem">Add an item</a>
+</div> -->
+<button class="btn btn-primary addItem" onclick="addItem()">Add Item</button>
+
 
 
 {% endblock %}
