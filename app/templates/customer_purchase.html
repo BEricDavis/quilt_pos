@@ -9,13 +9,23 @@
 
 
 </script>
+<script type="text/javascript">
+        var data = {
+            item: "itemNumber",
+            description: "Some Description",
+            price: "somePrice"
+        }
+</script>
 
-<div id="cart_header" class="table">Header Stuff?</div>
-<div id="cart_body" class="body">
-    <div id="cart_item" class="row">things</div>
-    
-</div>
+<table id="tbl1" class="cart">
+    <tr>
+        <td>Item</td>
+        <td>Description</td>
+        <td>Quantity</td>
+        <td>Price</td>
+    </tr>
 
+</table>
 
 <!-- <div id="pos">
     <div id="customer">
@@ -49,7 +59,7 @@
     
 </div>
 </div> -->
-<button class="btn btn-primary addItem" onclick="addItem()">Add Item</button>
+<button class="btn btn-primary addItem" onclick="addItem('tbl1')">Add Item</button>
 
 
 
