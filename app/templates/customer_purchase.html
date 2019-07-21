@@ -1,66 +1,43 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600" rel="stylesheet" type="text/css">
+        <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+        <link type="text/css" rel="stylesheet" href="style.css">
+        <title>Budgety</title>
+    </head>
+    <body>
+        
+        
+        
+        
+        <div class="bottom">
+            <div class="add">
+                <div class="add__container">
+                    <!-- <select class="add__type">
+                        <option value="inc" selected>+</option>
+                        <option value="exp">-</option>
+                    </select> -->
+                    <input type="text" class="add__item" placeholder="Item number">
+                    <input type="text" class="add__description" placeholder="Description">
+                    <input type="number" class="add__qty" placeholder="Quantity">
+                    <input type="number" class="add__price" placeholder="Price">
+                    <button class="add__btn" onclick="addItem()"><i class="ion-ios-checkmark-outline"></i></button>
+                </div>
+            </div>
+            
+            <div class="container clearfix">
+                <div class="cart">
+                    <h2 class="cart__title">Items</h2>
+                    
+                    <div class="cart__items">
 
-{% block app_content %}
-<!-- A failed attempt to add rows to a cart table.  Not sure why this isn't working.-->
-<!--https://stackoverflow.com/questions/18997336/ajax-add-new-row-to-table-or-remove-using-ajax -->
-<!--http://jsfiddle.net/scumah/xtyFh/8/-->
-<!-- <script type="text/javascript"> -->
-<script type="text/javascript" src="{{ url_for('static', filename='js/customer_purchase.js') }}">
-
-
-</script>
-<script type="text/javascript">
-        var data = {
-            item: "itemNumber",
-            description: "Some Description",
-            price: "somePrice"
-        }
-</script>
-
-<table id="tbl1" class="cart">
-    <tr>
-        <td>Item</td>
-        <td>Description</td>
-        <td>Quantity</td>
-        <td>Price</td>
-    </tr>
-
-</table>
-
-<!-- <div id="pos">
-    <div id="customer">
-{{ customer.first_name }}, {{ customer.last_name }}
-</div>
-<div id="cart_div">
-    <table class="dynatable">
-        <thead>
-            <tr>
-                <th>Iten Number</th>
-                <th>Description</th>
-                <th>Quantity</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody id="cart_body">
-            <tr>
-                <td><input type="text"></td>
-                <td>
-                    <input type="text">
-                </td>
-                <td>
-                    <input type="text">
-                </td>
-                <td>
-                    <input type="text">
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    
-</div>
-</div> -->
-<button class="btn btn-primary addItem" onclick="addItem('tbl1')">Add Item</button>
-
-
-
-{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="{{ url_for('static', filename='js/customer_purchase.js') }}"></script>
+    </body>
+</html>

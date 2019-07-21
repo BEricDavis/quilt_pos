@@ -1,31 +1,64 @@
-function addItem(tbl) {
-// https://stackoverflow.com/questions/49465523/injecting-python-flask-variable-into-html-table-cell-using-javascript
+function getItem() {
+    return {
+        item: document.querySelector('add__item'),
+        description: document.querySelector('add__description'),
+        price: document.querySelector('add__price'),
+        quantity: document.querySelector('add__quantity'),
+    }
+}
 
-    var table = document.getElementById(tbl);
-    console.log(table);
-    var tr = document.createElement("tr");
+function addItem() {
+    var html, newHtml, element;
+    item = getItem();
+    console.log(item)
+    // create html with placeholder text
+    element = DOMstrings.expensesContainer;
+    html = '<div class="item clearfix" id="expense-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
+
+    // replace the placeholder text with data
+    newHtml = html.replace('%id%', obj.id);
+    newHtml = newHtml.replace('%description%', obj.description);
+    newHtml = newHtml.replace('%value%', obj.value);
+
+
+    // insert html into DOM
+    // see lecture 83 
+    // https://relxlearning.udemy.com/the-complete-javascript-course/learn/lecture/5869236#content
+    document.querySelector(element).insertAdjacentHTML('beforeend', newHtml); 
+
+}
+
+
+
+// This addItem method is promising but still falls short
+// function addItem(tbl) {
+// // https://stackoverflow.com/questions/49465523/injecting-python-flask-variable-into-html-table-cell-using-javascript
+
+//     var table = document.getElementById(tbl);
+//     console.log(table);
+//     var tr = document.createElement("tr");
     
-    var td1 = document.createElement("td");
-    var text1 = document.createTextNode(data.item);
-    var td2 = document.createElement("td");
-    var text2 = document.createTextNode(data.description)
-    var td3 = document.createElement("input");
-    var text3 = document.createTextNode("c")
-    var td4 = document.createElement("td");
-    var text4 = document.createTextNode(data.price)
+//     var td1 = document.createElement("input");
+//     var text1 = document.createTextNode(data.item);
+//     var td2 = document.createElement("input");
+//     var text2 = document.createTextNode(data.description)
+//     var td3 = document.createElement("input");
+//     var text3 = document.createTextNode("c")
+//     var td4 = document.createElement("input");
+//     var text4 = document.createTextNode(data.price)
 
 
-    td1.appendChild(text1);
-    td2.appendChild(text2);
-    //td3.appendChild(text3);
-    td4.appendChild(text4);
+//     td1.appendChild(text1);
+//     td2.appendChild(text2);
+//     //td3.appendChild(text3);
+//     td4.appendChild(text4);
 
-    tr.appendChild(td1);
-    tr.appendChild(td2);
-    tr.appendChild(td3);
-    tr.appendChild(td4);
+//     tr.appendChild(td1);
+//     tr.appendChild(td2);
+//     tr.appendChild(td3);
+//     tr.appendChild(td4);
 
-    table.appendChild(tr);}
+//     table.appendChild(tr);}
 
 // var addItem = function(items) {
 //     // var new_item = '<tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><a href="#" id=removeItem">Remove</a></td></tr>'
