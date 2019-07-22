@@ -1,24 +1,27 @@
-function getItem() {
+var getItem = function() {
+    console.log('in getItem')
     return {
-        item: document.querySelector('add__item'),
-        description: document.querySelector('add__description'),
-        price: document.querySelector('add__price'),
-        quantity: document.querySelector('add__quantity'),
+        item: document.querySelector('.add__item').value,
+        description: document.querySelector('.add__description').value,
+        price: document.querySelector('.add__price').value,
+        quantity: document.querySelector('.add__qty').value,
     }
 }
 
-function addItem() {
+var addItem = function() {
     var html, newHtml, element;
     item = getItem();
     console.log(item)
     // create html with placeholder text
-    element = DOMstrings.expensesContainer;
-    html = '<div class="item clearfix" id="expense-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
+    element = '.cart__items';
+    // html = '<div class="item clearfix" id="expense-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
+
+    html = '<div class="item clearfix" id="item-%id%">	<div class="item__item">%item%</div><div class="item__description">%description%</div><div class="item__quantity">%quantity%</div><div class="item__price">%price%</div><div class="right clearfix"><div class="item__delete"><button class="item__delete--btn">	<i class="ion-ios-close-outline"></i></button></div></div></div>'
 
     // replace the placeholder text with data
-    newHtml = html.replace('%id%', obj.id);
-    newHtml = newHtml.replace('%description%', obj.description);
-    newHtml = newHtml.replace('%value%', obj.value);
+    newHtml = html.replace('%id%', item.item);
+    newHtml = newHtml.replace('%description%', item.description);
+    newHtml = newHtml.replace('%value%', item.value);
 
 
     // insert html into DOM
