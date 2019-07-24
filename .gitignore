@@ -5,3 +5,4 @@ venv/
 pos.db
 logs/
 __pycache__
+settings.json
